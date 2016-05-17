@@ -1,6 +1,5 @@
 package com.andrey.service;
 
-import com.andrey.model.Department;
 import com.andrey.model.Employee;
 import org.hibernate.Query;
 import org.hibernate.Session;

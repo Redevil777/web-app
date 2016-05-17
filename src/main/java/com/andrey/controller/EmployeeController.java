@@ -4,6 +4,8 @@ import com.andrey.model.Department;
 import com.andrey.model.Employee;
 import com.andrey.service.DepartmentService;
 import com.andrey.service.EmployeeService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,7 +25,7 @@ import java.util.List;
 @RequestMapping("/employee")
 public class EmployeeController {
 
-   // private Logger LOGGER = LogManager.getLogger(DepartmentService.class);
+    private Logger LOGGER = LogManager.getLogger(DepartmentService.class);
 
     @Resource(name = "employeeService")
     private EmployeeService employeeService;
@@ -34,7 +36,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String getAll(Model model){
-      //  LOGGER.debug("get all employee");
+        LOGGER.debug("get all employee");
 
         List<Employee> employees = employeeService.getAll();
         List<Department> departments = departmentService.getAll();
@@ -49,7 +51,7 @@ public class EmployeeController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String getAdd(Model model){
 
-       // LOGGER.debug("adding employee");
+        LOGGER.debug("adding employee");
 
         List<Department> departments = departmentService.getAll();
 
@@ -62,7 +64,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String add(@ModelAttribute("employee") Employee employee){
-      // LOGGER.debug("employee added");
+        LOGGER.debug("employee added");
 
         employeeService.add(employee);
 
@@ -72,7 +74,7 @@ public class EmployeeController {
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String delete(@RequestParam(value = "id", required = true) int id, Model model){
 
-     //   LOGGER.debug("delete employee");
+        LOGGER.debug("delete employee");
 
         employeeService.delete(id);
 
@@ -81,7 +83,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String getEdit(@RequestParam(value = "id", required = true) int id, Model model){
-       // LOGGER.debug("editing employee");
+        LOGGER.debug("editing employee");
 
         model.addAttribute("employee", employeeService.get(id));
         model.addAttribute("department", departmentService.getAll());
@@ -93,7 +95,7 @@ public class EmployeeController {
     public String saveEdit(@ModelAttribute("employee") Employee employee,
                            @RequestParam(value = "id",required = true) int id,
                            Model model){
-        //LOGGER.debug("employee edited");
+        LOGGER.debug("employee edited");
 
         employee.setId(id);
 
@@ -108,7 +110,7 @@ public class EmployeeController {
     public String getEmployeesBetweenDates(@RequestParam(value = "from") Date from,
                                            @RequestParam(value = "to") Date to,
                                            Model model){
-       // LOGGER.debug("get employee between dates of birthday");
+        LOGGER.debug("get employee between dates of birthday");
 
         model.addAttribute("employee", employeeService.getEmployeesBetweenDates(from, to) );
         model.addAttribute("from", from);
@@ -120,6 +122,8 @@ public class EmployeeController {
     @RequestMapping(value = "/byDate", method = RequestMethod.GET)
     public String getEmployeeByDate(@RequestParam(value = "date") Date date,
                                     Model model){
+
+        LOGGER.debug("get Employee By Date");
         List<Employee> employees = employeeService.getEmployeeByDate(date);
 
         for(Employee qwe:employees){

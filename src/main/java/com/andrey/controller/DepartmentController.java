@@ -3,6 +3,8 @@ package com.andrey.controller;
 import com.andrey.model.Department;
 import com.andrey.model.Employee;
 import com.andrey.service.DepartmentService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,12 +28,12 @@ public class DepartmentController {
     @Resource(name = "departmentService")
     private DepartmentService departmentService;
 
-    // private Logger LOGGER = LogManager.getLogger(DepartmentController.class);
+     private Logger LOGGER = LogManager.getLogger(DepartmentController.class);
 
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String getAll(Model model){
-        // LOGGER.info("get all department");
+         LOGGER.info("get all department");
 
         List<Department> departments = departmentService.getAll();
 
@@ -42,7 +44,7 @@ public class DepartmentController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String getAdd(Model model){
-        //  LOGGER.debug("adding department");
+          LOGGER.debug("adding department");
 
         model.addAttribute("depatr", new Department());
 
@@ -52,7 +54,7 @@ public class DepartmentController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String add(@ModelAttribute("depatr") Department department){
 
-        //  LOGGER.debug("department added");
+        LOGGER.debug("department added");
 
         departmentService.add(department);
 
@@ -61,7 +63,7 @@ public class DepartmentController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String delete(@RequestParam(value = "id", required = true) int id, Model model){
-        // LOGGER.debug("delete department by id");
+        LOGGER.debug("delete department by id");
 
         departmentService.deleteById(id);
 
@@ -72,7 +74,7 @@ public class DepartmentController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String getEdit(@RequestParam(value = "id", required = true) int id, Model model){
-        // LOGGER.debug("editing department");
+        LOGGER.debug("editing department");
 
         model.addAttribute("depAtr", departmentService.get(id));
 
@@ -83,7 +85,7 @@ public class DepartmentController {
     public String saveEdit(@ModelAttribute("depAtr") Department department,
                            @RequestParam(value = "id", required = true) int id,
                            Model model){
-        // LOGGER.debug("department edited");
+        LOGGER.debug("department edited");
 
         department.setId(id);
 
@@ -97,7 +99,7 @@ public class DepartmentController {
     @RequestMapping(value = "/avg", method = RequestMethod.GET)
     public String avg(@RequestParam(value = "id", required = true) int id,
                       Model model){
-        //  LOGGER.debug("average salary");
+        LOGGER.debug("average salary");
 
         List<Employee> departments = departmentService.avg(id);
 
@@ -124,13 +126,11 @@ public class DepartmentController {
     @RequestMapping(value = "/employee", method = RequestMethod.GET)
     public String emp(@RequestParam(value = "id", required = true) int id,
                       Model model){
+        LOGGER.debug("get employee by department");
+
         List<Employee> employees = departmentService.emp(id);
 
         model.addAttribute("employee", employees);
-
-        for(Employee qwe: employees){
-            System.out.println(qwe.getFname());
-        }
 
         return "departmentemployee";
     }

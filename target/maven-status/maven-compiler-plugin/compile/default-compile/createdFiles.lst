@@ -1,7 +1,0 @@
-com\andrey\controller\EmployeeController.class
-com\andrey\controller\DepartmentController.class
-com\andrey\service\EmployeeService.class
-com\andrey\service\DepartmentService.class
-com\andrey\model\Employee.class
-com\andrey\controller\HomeController.class
-com\andrey\model\Department.class
