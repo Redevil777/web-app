@@ -56,6 +56,12 @@
     <type>jar</type>
     <scope>compile</scope>
   </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jsp-api</artifactId>
+      <version>2.0</version>
+      <scope>provided</scope>
+    </dependency>
   <dependency>
     <groupId>taglibs</groupId>
     <artifactId>standard</artifactId>
@@ -161,12 +167,21 @@
     <type>jar</type>
     <scope>compile</scope>
   </dependency>
+    <!-- http://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina -->
 
   </dependencies>
 
 <build>
 <finalName>spring-hibernate-mysql</finalName>
 <plugins>
+  <plugin>
+    <groupId>org.apache.tomcat.maven</groupId>
+    <artifactId>tomcat7-maven-plugin</artifactId>
+    <version>2.1</version>
+    <configuration>
+      <path>/</path>
+    </configuration>
+  </plugin>
   <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-compiler-plugin</artifactId>
